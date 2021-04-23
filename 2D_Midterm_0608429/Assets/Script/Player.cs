@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
     [Header("蛋糕"), Range(0, 1000)]
     public int cake = 0;
     [Header("虛擬搖桿")]
-    public FixedJoystick joystick;
+    public FixedJoystick joystick;    
+    [Header("虛擬搖桿座標")]
+    public Transform traJoy;
     [Header("變形元件")]
     public Transform tra;
     [Header("動畫元件")]
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     public Text textCake;
 
 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = new Color(1, 0, 0, 0.2f);
@@ -44,13 +47,24 @@ public class Player : MonoBehaviour
     {
         float h = joystick.Horizontal;
         float v = joystick.Vertical;
+        Vector3 posJoy = traJoy.position;      // 取得 玩家座標
+
         /*if(h == 0.5f)
         {
             ani.SetFloat("靜止", h);
         }*/
         tra.Translate(h * speed * Time.deltaTime, v * speed * Time.deltaTime, 0);
-        ani.SetFloat("水平", h);
-        //ani.SetFloat("垂直", v);
+        if(Mathf.Abs(h) > 0.1f)
+        {
+            ani.SetFloat("水平", h);
+            print(h);
+            //ani.SetFloat("垂直", v);
+        }
+        
+        if(posJoy.x == 0)
+        {
+            
+        }
     }
 
     private void Update()

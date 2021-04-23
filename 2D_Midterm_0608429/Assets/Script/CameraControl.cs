@@ -22,7 +22,8 @@ public class CameraControl : MonoBehaviour
     private void Track()
     {
         Vector3 posCam = transform.position;   // 取得 攝影機座標
-        Vector3 posPla = player.position;      // 取得 玩家座標
+        Vector3 posPla = player.position ;      // 取得 玩家座標
+        posPla.x += 3;
 
         // Lerp 差值 使A值逐漸靠近B值
         posCam = Vector3.Lerp(posCam, posPla, 0.5f * speed * Time.deltaTime);
